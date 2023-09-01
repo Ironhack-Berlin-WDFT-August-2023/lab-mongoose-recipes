@@ -16,7 +16,23 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
+    console.log("All existing recipes deleted from the DB!!!")
     // Run your code here, after you have insured that the connection was made
+    // iteration 2
+
+    const newRecipe = {
+      title: 'Mixto quente',
+      level: 'Easy Peasy',
+      ingredients: ['pão francês', 'queijo', 'presunto'],
+      cuisine: 'Brasileira',
+      dishType: 'snack',
+      image:
+        'http://culinaria.culturamix.com/blog/wp-content/gallery/misto-quente-3/Misto-Quente-6.jpg',
+      duration: 5,
+      creator: 'unknown'
+    };
+
+    return Recipe.create(newRecipe);
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
