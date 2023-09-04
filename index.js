@@ -34,6 +34,24 @@ mongoose
 
     return Recipe.create(newRecipe);
   })
+  .then(result => {
+    console.log(`THISSSSSSSSSSS Recipe created: ${result.title}`)
+    return Recipe.insertMany(data)
+  })
+  .then(result => {
+    console.log(`Created: ${result.length} recipes`);
+    return Recipe.findOneAndUpdate({title: 'Rigatoni alla Genovese'}, {duration: 100}, {new: true}) 
+  })
+  .then(result => {
+    console.log(`Update ${result.title} and new duration is: ${result.duration}`);
+    return Recipe.deleteOne({ title: 'Carrot Cake' })
+  })
+  .then((result) => {
+    console.log("This recipe was deleted:", result)
+  })
   .catch(error => {
     console.error('Error connecting to the database', error);
-  });
+  })
+  .finally(() => mongoose.connection.close())
+
+
